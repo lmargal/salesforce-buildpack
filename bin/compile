@@ -67,7 +67,7 @@ mkdir -p $XDG_CACHE_HOME/sfdx
 touch $XDG_CACHE_HOME/sfdx/autoupdate
 
 # log installed plugins
-sfdx plugins
+sfdx force --help
 
 status "SFDX CLI and SFDX plugins installation complete"
 

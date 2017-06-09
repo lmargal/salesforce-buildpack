@@ -23,7 +23,7 @@ SALESFORCE_DIR=$BUILD_DIR/$SALESFORCE_DIR_NAME
 SALESFORCE_CACHE_DIR=$CACHE_DIR/$SALESFORCE_DIR_NAME
 
 ### Load dependencies
-#source $BP_DIR/lib/common.sh
+source $BP_DIR/lib/common.sh
 #source $BP_DIR/lib/node.sh
 #source $BP_DIR/lib/libs.sh
 

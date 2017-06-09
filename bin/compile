@@ -84,4 +84,25 @@ sfdx plugins
 
 status "SFDX CLI and SFDX plugins installation complete"
 
+###   W R I T E   E N V   P R O F I L E   S C R I P T
+# write env script to set various vars so release and test scripts
+# can use heroku cli and plugins
+export SALESFORCE_DEPLOY_DIR="\$HOME/$SALESFORCE_DIR_NAME"
+mkdir -p $BUILD_DIR/.profile.d
+cat <<EOF >$BUILD_DIR/.profile.d/salesforce-env.sh
+# set path so release and customer scripts and use heroku cli and node exes
+export PATH="\$PATH:\$HOME/$VENDORED_SFDX_CLI/heroku/bin"
+# set so heroku cli can re-use plugins
+export XDG_DATA_HOME="\$HOME/.local"
+# set so heroku cli can see heroku/autoupdate to not trigger update
+export XDG_CACHE_HOME="\$HOME/.cache"
+# disable encryption 'cause lib secret requires head
+export SFDX_DISABLE_ENCRYPTION=true;
+
+# setup env to support sfdx plugin commands
+mkdir -p .local/.sfdx
+EOF
+
+chmod +x $BUILD_DIR/.profile.d/salesforce-env.sh
+
 highlight "DONE!  Completed in $(($SECONDS - $START_TIME))s"

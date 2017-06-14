@@ -38,6 +38,7 @@ touch $BUILD_DIR/.cache/sfdx/autoupdate
 sfdx force --help
 # Install beta pre-release plugin
 if [ "$DX_BETA_PRE_RELEASE" == "true" ]; then
+    echo "Installing beta pre-release plugins..."
     sfdx plugins:install salesforcedx@pre-release
 fi
 

@@ -9,11 +9,6 @@ CACHE_DIR=${2:-}
 ENV_DIR=${3:-}
 BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
 
-### Configure salesforce directories
-SALESFORCE_DIR_NAME=".salesforce"
-SALESFORCE_DIR=$BUILD_DIR/$SALESFORCE_DIR_NAME
-SALESFORCE_CACHE_DIR=$CACHE_DIR/$SALESFORCE_DIR_NAME
-
 ### Load dependencies
 source $BP_DIR/lib/common.sh
 
@@ -21,55 +16,36 @@ echo ""
 highlight "Welcome to sfdx-cli buildpack!!"
 echo ""
 
-
-###   E X P O R T   C O N F I G   V A R S
-
-mkdir -p $SALESFORCE_DIR
-export SALESFORCE_DIR=$SALESFORCE_DIR
-
-
 ###   S F D X   C L I
 status "Installing SFDX CLI and SFDX plugins"
 
 # install sfdx cli w/ all sfdx plugins
 cd "$BUILD_DIR"
 
-#SFDX_CLI_URL=https://developer.salesforce.com/media/salesforce-cli/beta/sfdx-v5.7.4-57b4969-linux-amd64.tar.xz
-#if [[ -z "$(which wget)" ]]; then
- # curl -s $SFDX_CLI_URL | tar xvfJ -
-#else
- # wget -qO- $SFDX_CLI_URL | tar xvfJ -
-#fi
-
 tar xvfJ $BP_DIR/resources/sfdx-v5.7.4.tar.xz
 
 export PATH="$PATH:$BUILD_DIR/sfdx/bin"
 export HOME="$BUILD_DIR"
-export XDG_DATA_HOME="$BUILD_DIR"
-export XDG_CACHE_HOME="$BUILD_DIR/.cache"
 
 # touch autoupdate file to prevent 'heroku update' (which breaks
 # tar as 'heroku update' alters what is being tar'd)
-mkdir -p $XDG_CACHE_HOME/sfdx
-touch $XDG_CACHE_HOME/sfdx/autoupdate
+mkdir -p $BUILD_DIR/.cache/sfdx
+touch $BUILD_DIR/.cache/sfdx/autoupdate
 
 # log installed plugins
 sfdx force --help
+# Install beta pre-release plugin
+
 
 status "SFDX CLI and SFDX plugins installation complete"
 
 ###   W R I T E   E N V   P R O F I L E   S C R I P T
 # write env script to set various vars so release and test scripts
 # can use heroku cli and plugins
-export SALESFORCE_DEPLOY_DIR="\$HOME/$SALESFORCE_DIR_NAME"
 mkdir -p $BUILD_DIR/.profile.d
 cat <<EOF >$BUILD_DIR/.profile.d/salesforce-env.sh
 # set path so release and customer scripts and use heroku cli and node exes
 export PATH="\$PATH:\$HOME/sfdx/bin"
-# set so heroku cli can re-use plugins
-export XDG_DATA_HOME="\$HOME"
-# set so heroku cli can see heroku/autoupdate to not trigger update
-export XDG_CACHE_HOME="\$HOME/.cache"
 # disable encryption 'cause lib secret requires head
 export SFDX_DISABLE_ENCRYPTION=true;
 EOF

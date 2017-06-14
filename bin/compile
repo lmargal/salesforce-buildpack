@@ -55,6 +55,8 @@ touch $XDG_CACHE_HOME/sfdx/autoupdate
 # log installed plugins
 sfdx force --help
 
+ls -all
+
 status "SFDX CLI and SFDX plugins installation complete"
 
 ###   W R I T E   E N V   P R O F I L E   S C R I P T

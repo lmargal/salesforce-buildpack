@@ -44,14 +44,15 @@ cd "$BUILD_DIR"
 tar xvfJ $BP_DIR/resources/sfdx-v5.7.4.tar.xz
 
 export PATH="$PATH:$BUILD_DIR/sfdx/bin"
-#export XDG_DATA_HOME="$BUILD_DIR/.local"
-#export XDG_CACHE_HOME="$BUILD_DIR/.cache"
+export XDG_DATA_HOME="$BUILD_DIR/.local"
+export XDG_CACHE_HOME="$BUILD_DIR/.cache"
+export XDG_RUNTIME_DIR="$BUILD_DIR/.local"
 
 
 # touch autoupdate file to prevent 'heroku update' (which breaks
 # tar as 'heroku update' alters what is being tar'd)
-#mkdir -p $XDG_CACHE_HOME/sfdx
-#touch $XDG_CACHE_HOME/sfdx/autoupdate
+mkdir -p $XDG_CACHE_HOME/sfdx
+touch $XDG_CACHE_HOME/sfdx/autoupdate
 
 # log installed plugins
 sfdx force --help
@@ -67,13 +68,14 @@ cat <<EOF >$BUILD_DIR/.profile.d/salesforce-env.sh
 # set path so release and customer scripts and use heroku cli and node exes
 export PATH="\$PATH:\$HOME/sfdx/bin"
 # set so heroku cli can re-use plugins
-#export XDG_DATA_HOME="\$HOME/.local"
+export XDG_DATA_HOME="\$HOME/.local"
 # set so heroku cli can see heroku/autoupdate to not trigger update
-#export XDG_CACHE_HOME="\$HOME/.cache"
+export XDG_CACHE_HOME="\$HOME/.cache"
+export XDG_RUNTIME_DIR="\$HOME/.local"
 # disable encryption 'cause lib secret requires head
-#export SFDX_DISABLE_ENCRYPTION=true;
+export SFDX_DISABLE_ENCRYPTION=true;
 # setup env to support sfdx plugin commands
-#mkdir -p .local/.sfdx
+mkdir -p .local/.sfdx
 EOF
 
 chmod +x $BUILD_DIR/.profile.d/salesforce-env.sh

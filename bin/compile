@@ -43,7 +43,7 @@ cd "$BUILD_DIR"
 
 tar xvfJ $BP_DIR/resources/sfdx-v5.7.4.tar.xz
 
-$BP_DIR/resources/sfdx/install
+sfdx/install
 
 #export PATH="$PATH:$BUILD_DIR/sfdx/bin"
 #export XDG_DATA_HOME="$BUILD_DIR/.local"

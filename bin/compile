@@ -68,6 +68,7 @@ export SFDX_DISABLE_ENCRYPTION=true;
 
 # setup env to support sfdx plugin commands
 mkdir -p .sfdx
+chmod 777 .sfdx
 EOF
 
 #hmod +x $BUILD_DIR/.profile.d/salesforce-env.sh

@@ -44,6 +44,7 @@ cd "$BUILD_DIR"
 tar xvfJ $BP_DIR/resources/sfdx-v5.7.4.tar.xz
 
 export PATH="$PATH:$BUILD_DIR/sfdx/bin"
+export HOME="$BUILD_DIR"
 export XDG_DATA_HOME="$BUILD_DIR"
 export XDG_CACHE_HOME="$BUILD_DIR/.cache"
 
@@ -54,8 +55,6 @@ touch $XDG_CACHE_HOME/sfdx/autoupdate
 
 # log installed plugins
 sfdx force --help
-
-ls -all
 
 status "SFDX CLI and SFDX plugins installation complete"
 

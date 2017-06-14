@@ -43,18 +43,18 @@ cd "$BUILD_DIR"
 
 tar xvfJ $BP_DIR/resources/sfdx-v5.7.4.tar.xz
 
-export PATH="$PATH:$BUILD_DIR/sfdx/bin"
-export XDG_DATA_HOME="$BUILD_DIR/"
-export XDG_CACHE_HOME="$BUILD_DIR/.cache"
+#export PATH="$PATH:$BUILD_DIR/sfdx/bin"
+#export XDG_DATA_HOME="$BUILD_DIR/"
+#export XDG_CACHE_HOME="$BUILD_DIR/.cache"
 
 
 # touch autoupdate file to prevent 'heroku update' (which breaks
 # tar as 'heroku update' alters what is being tar'd)
-mkdir -p $XDG_CACHE_HOME/sfdx
-touch $XDG_CACHE_HOME/sfdx/autoupdate
+#mkdir -p $XDG_CACHE_HOME/sfdx
+#touch $XDG_CACHE_HOME/sfdx/autoupdate
 
 # log installed plugins
-sfdx force --help
+#sfdx force --help
 
 status "SFDX CLI and SFDX plugins installation complete"
 

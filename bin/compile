@@ -9,8 +9,6 @@ CACHE_DIR=${2:-}
 ENV_DIR=${3:-}
 BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
 
-: ${DX_BETA_PRE_RELEASE:="false"}
-
 ### Load dependencies
 source $BP_DIR/lib/common.sh
 
@@ -37,10 +35,8 @@ touch $BUILD_DIR/.cache/sfdx/autoupdate
 # log installed plugins
 sfdx force --help
 # Install beta pre-release plugin
-if [ "$DX_BETA_PRE_RELEASE" == "true" ]; then
-    echo "Installing beta pre-release plugins..."
-    sfdx plugins:install salesforcedx@pre-release
-fi
+sfdx plugins:install salesforcedx@pre-release
+
 
 
 status "SFDX CLI and SFDX plugins installation complete"

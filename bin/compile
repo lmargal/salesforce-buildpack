@@ -42,15 +42,10 @@ cd "$BUILD_DIR"
 #fi
 
 tar xvfJ $BP_DIR/resources/sfdx-v5.7.4.tar.xz
-echo "Build DIR:"
-echo $BUILD_DIR
-echo "Home:"
-echo $HOME
+
 export PATH="$PATH:$BUILD_DIR/sfdx/bin"
-export XDG_DATA_HOME="$HOME"
+export XDG_DATA_HOME="$BUILD_DIR"
 export XDG_CACHE_HOME="$BUILD_DIR/.cache"
-echo "XDG_DATA_HOME:"
-echo $XDG_DATA_HOME
 
 # touch autoupdate file to prevent 'heroku update' (which breaks
 # tar as 'heroku update' alters what is being tar'd)
@@ -76,7 +71,6 @@ export XDG_DATA_HOME="\$HOME"
 export XDG_CACHE_HOME="\$HOME/.cache"
 # disable encryption 'cause lib secret requires head
 export SFDX_DISABLE_ENCRYPTION=true;
-#mkdir -p .local/.sfdx
 EOF
 
 chmod +x $BUILD_DIR/.profile.d/salesforce-env.sh

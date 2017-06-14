@@ -67,8 +67,7 @@ export XDG_CACHE_HOME="\$HOME/.cache"
 export SFDX_DISABLE_ENCRYPTION=true;
 
 # setup env to support sfdx plugin commands
-mkdir -p .sfdx
-chmod 777 .sfdx
+mkdir -p .local/.sfdx
 EOF
 
 #hmod +x $BUILD_DIR/.profile.d/salesforce-env.sh

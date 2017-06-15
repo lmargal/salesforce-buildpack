@@ -29,8 +29,8 @@ export HOME="$BUILD_DIR"
 
 # touch autoupdate file to prevent 'heroku update' (which breaks
 # tar as 'heroku update' alters what is being tar'd)
-mkdir -p $BUILD_DIR/.cache/sfdx
-touch $BUILD_DIR/.cache/sfdx/autoupdate
+#mkdir -p $BUILD_DIR/.cache/sfdx
+#touch $BUILD_DIR/.cache/sfdx/autoupdate
 
 # log installed plugins
 sfdx force --help

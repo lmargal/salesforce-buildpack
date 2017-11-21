@@ -10,15 +10,10 @@ ENV_DIR=${3:-}
 BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
 CLI-VERSION=6.0.16
 
-### Load dependencies
-source $BP_DIR/lib/common.sh
-
-echo ""
-highlight "Welcome to copado sfdx-cli buildpack!!"
-echo ""
+echo "Welcome to copado sfdx-cli buildpack!!"
 
 ###   S F D X   C L I
-status "Installing SFDX CLI and SFDX plugins"
+echo "Installing SFDX CLI and SFDX plugins"
 
 # install sfdx cli w/ all sfdx plugins
 cd "$BUILD_DIR"
@@ -32,7 +27,7 @@ export HOME="$BUILD_DIR"
 mkdir -p $BUILD_DIR/.cache/sfdx
 touch $BUILD_DIR/.cache/sfdx/autoupdate
 
-status "SFDX CLI and SFDX plugins installation complete"
+echo "SFDX CLI and SFDX plugins installation complete"
 
 ###   W R I T E   E N V   P R O F I L E   S C R I P T
 # write env script to set various vars so release and test scripts
@@ -47,4 +42,4 @@ EOF
 
 chmod +x $BUILD_DIR/.profile.d/salesforce-env.sh
 
-highlight "DONE!  Completed in $(($SECONDS - $START_TIME))s"
+echo "DONE!  Completed in $(($SECONDS - $START_TIME))s"

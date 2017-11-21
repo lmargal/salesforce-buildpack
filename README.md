@@ -1,4 +1,4 @@
-# Heroku Buildpack for Sfdx command line interface
+# Copado Buildpack for Sfdx command line interface
 
 
 ```

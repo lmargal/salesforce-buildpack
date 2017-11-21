@@ -1,4 +1,4 @@
-# Copado Buildpack for Sfdx command line interface
+# Buildpack for Sfdx command line interface
 
 
 ```

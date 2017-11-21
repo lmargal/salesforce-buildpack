@@ -8,12 +8,13 @@ BUILD_DIR=${1:-}
 CACHE_DIR=${2:-}
 ENV_DIR=${3:-}
 BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
+CLI-VERSION=5.7.4
 
 ### Load dependencies
 source $BP_DIR/lib/common.sh
 
 echo ""
-highlight "Welcome to sfdx-cli buildpack!!"
+highlight "Welcome to copado sfdx-cli buildpack!!"
 echo ""
 
 ###   S F D X   C L I
@@ -22,22 +23,14 @@ status "Installing SFDX CLI and SFDX plugins"
 # install sfdx cli w/ all sfdx plugins
 cd "$BUILD_DIR"
 
-tar xvfJ $BP_DIR/resources/sfdx-v5.7.4.tar.xz
+tar xvfJ $BP_DIR/resources/sfdx-v${CLI-VERSION}.tar.xz
 
 export PATH="$PATH:$BUILD_DIR/sfdx/bin"
 export HOME="$BUILD_DIR"
 
-# touch autoupdate file to prevent 'heroku update' (which breaks
-# tar as 'heroku update' alters what is being tar'd)
-#mkdir -p $BUILD_DIR/.cache/sfdx
-#touch $BUILD_DIR/.cache/sfdx/autoupdate
-
-# log installed plugins
-sfdx force --help
-# Install beta pre-release plugin
-sfdx plugins:install salesforcedx@pre-release
-
-
+# touch autoupdate file to prevent 'heroku update' 
+mkdir -p $BUILD_DIR/.cache/sfdx
+touch $BUILD_DIR/.cache/sfdx/autoupdate
 
 status "SFDX CLI and SFDX plugins installation complete"
 
